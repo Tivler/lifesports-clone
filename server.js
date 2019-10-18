@@ -20,6 +20,7 @@ mongoose.connect('mongodb://localhost/LifeSports', { useNewUrlParser: true, useU
 
 /* Will be sent to a separate file to be clean */
 
+
 /* start of Attendance */
 const attendanceSchema =  new Schema({
     Date: Date,
