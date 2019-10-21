@@ -15,7 +15,7 @@ let Exercise = require('../models/exercise.model');
 // 1. get all exercise logs on record
 // GET: /
 // ========================================
-app.get("/all", (req, res) => {
+app.get("/exercises/all", (req, res) => {
     const collection = db.collection('LifeSports')
     collection.find({}).toArray((error, data) => {    
       if (error) {
@@ -30,7 +30,7 @@ app.get("/all", (req, res) => {
 // 2. add a new exercise log
 // POST: /add
 // ========================================
-app.post("/add", (req, res) => { 
+app.post("/exercises/add", (req, res) => { 
     const collection = db.collection('LifeSports')
     collection.insertOne(req.body, (error, data) => {   
       if (error) {
@@ -44,7 +44,7 @@ app.post("/add", (req, res) => {
 // 3. retrieve a specfic exercise log
 // GET: /:id
 // ========================================
-app.get("/find/:id", (req, res) => {
+app.get("/exercises/find/:id", (req, res) => {
     const collection = db.collection('LifeSports')  
     collection.findOne(
       {
@@ -64,7 +64,7 @@ app.get("/find/:id", (req, res) => {
 // 4. delete a specfic exercise log
 // DELETE: /:id
 // ========================================
-app.delete("/delete/:id", (req, res) => {
+app.delete("/exercises/delete/:id", (req, res) => {
     const collection = db.collection('LifeSports')
     collection.deleteOne(
       {
@@ -85,7 +85,7 @@ app.delete("/delete/:id", (req, res) => {
 // with information sent by client on req body
 // POST: /update/:id
 // ========================================
-app.post("/update/:id", (req, res) => {
+app.post("/exercises/update/:id", (req, res) => {
     const collection = db.collection('LifeSports')
     collection.updateOne(
       {
