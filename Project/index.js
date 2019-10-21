@@ -18,9 +18,10 @@ app.use(express.json());
 // Serve up static assets (heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
-  uri = ""  // connection string for Atlas here  
-} else {
-  uri = "mongodb://localhost/lifesportsPat"  //e connection string for localhost mongo here  
+  uri = process.env.ATLAS_URI // connection string for Atlas here  
+} 
+else {
+  uri = process.env.ATLAS_URI //e connection string for localhost mongo here  
 }
 
 // connection to database
