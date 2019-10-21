@@ -15,29 +15,40 @@ let User = require('../models/user.model');
 // 1. get all users on record
 // GET: /
 // ========================================
-app.get("/users/all", (req, res) => {
-    const collection = db.collection('LifeSports')
-    collection.find({}).toArray((error, data) => {    
-      if (error) {
-        res.send(error);
-      } else {
-        res.json(data);
-      }
-    })
-  })
+router.get('/users/all', async (req, res) => {
+    const user = await User.find({})
+    res.json(user)
+ 
+})
 
+// router.get("/users/all", (req, res) => {
+//     const collection = db.collection('LifeSports')
+//     collection.find({}).toArray((error, data) => {    
+//       if (error) {
+//         res.send(error);
+//       } else {
+//         res.json(data);
+//       }
+//     })
+//   })
+  
 // 2. add a new user
 // POST /
 // ========================================
-app.post("/users/add", (req, res) => { 
-    const collection = db.collection('LifeSports')
-    collection.insertOne(req.body, (error, data) => {   
-      if (error) {
-        res.send(error);
-      } else {
-        res.send(data.ops[0]);
-      }
-    });
-  });
+  router.post('/users/add', async ({body}, res) => {
+    User.create(body)
+    .then(dbUsers => {
+      res.json(dbUsers)
+    })
+.catch(err => {
+  res.json(err)
+})
+})
+
+ // 3. delete a user
+ router.delete("/users/:id",async (req, res) => {
+    const user = await User.deleteOne({_id: req.params.id})
+    res.send(user)
+  })  // would i need to include users?
 
 module.exports = router;
