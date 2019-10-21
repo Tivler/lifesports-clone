@@ -70,6 +70,23 @@ router.delete('/:id', (req, res) =>{
 // 5. retrieve a specific exercise log and update it 
 // with information sent by client on req body
 // POST: /update/:id
+router.post('/add', (req, res) => {
+    let id = req.param.id
+    console.log(id)
+      Exercise.updateOne(
+        {
+          _id: req.params.id
+        },
+        {
+          $set: {
+            username: req.body.username,
+            description: req.body.description,
+            duration: req.body.duration,
+            date: req.body.date
+          }
+        },{new: true}
+      ).then(data=> res.json(data).catch(err=> console.error(err)))
+});
 
 // ========================================
 
